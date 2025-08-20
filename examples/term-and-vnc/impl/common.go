@@ -7,7 +7,7 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/luthermonson/go-proxmox"
+	"github.com/frarude/go-proxmox"
 )
 
 var client *proxmox.Client

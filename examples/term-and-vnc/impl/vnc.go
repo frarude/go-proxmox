@@ -8,7 +8,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
-	"github.com/luthermonson/go-proxmox"
+	"github.com/frarude/go-proxmox"
 	"github.com/rs/zerolog/log"
 )
 

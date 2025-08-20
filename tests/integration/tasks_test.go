@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/luthermonson/go-proxmox"
+	"github.com/frarude/go-proxmox"
 	"github.com/stretchr/testify/assert"
 )
 

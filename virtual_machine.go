@@ -669,7 +669,13 @@ func (v *VirtualMachine) NewSnapshot(ctx context.Context, name string) (task *Ta
 //   returns: task *Task, err
 func (v *VirtualMachine) NewSnapshotWithOption(ctx context.Context, name string, option string) (task *Task, err error) {
 	var upid UPID
-	if err = v.client.Post(ctx, fmt.Sprintf("/nodes/%s/qemu/%d/snapshot", v.Node, v.VMID), map[string]string{"snapname": name,"vmstate":"1"}, &upid); err != nil {
+	var optmap map[string]string
+	er:=json.Unmarshal([]byte(option),&optmap)
+    if err!=nil {
+	    return nil,err
+    }
+	optmap["snapname"]=name;
+	if err = v.client.Post(ctx, fmt.Sprintf("/nodes/%s/qemu/%d/snapshot", v.Node, v.VMID), optmap, &upid); err != nil {
 		return nil, err
 	}
 

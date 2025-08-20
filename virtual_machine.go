@@ -660,6 +660,13 @@ func (v *VirtualMachine) NewSnapshot(ctx context.Context, name string) (task *Ta
 	return NewTask(upid, v.client), nil
 }
 
+// NewSnapshotWithOption creates a snapshot of the VM 
+//   ctx: e.g. context.Background()
+//   name: snapshot name
+//   option: json coded string possibly containinh :
+//     - vmstate: 0|1
+//     - description: some short comment about the snapshot
+//   returns: task *Task, err
 func (v *VirtualMachine) NewSnapshotWithOption(ctx context.Context, name string, option string) (task *Task, err error) {
 	var upid UPID
 	if err = v.client.Post(ctx, fmt.Sprintf("/nodes/%s/qemu/%d/snapshot", v.Node, v.VMID), map[string]string{"snapname": name,"vmstate":"1"}, &upid); err != nil {

@@ -697,6 +697,10 @@ func (v *VirtualMachine) SnapshotRollback(ctx context.Context, name string) (tas
 	return NewTask(upid, v.client), nil
 }
 
+func (v *VirtualMachine) SnapshotDelete(ctx context.Context, name string, force bool ) (err error) {
+    return v.client.Delete(ctx, fmt.Sprintf("/nodes/%s/qemu/%d/snapshot/%s", v.Node, v.VMID, name), map[string]interface{}{"force": force})
+}
+
 // RRDData takes a timeframe enum and an optional consolidation function
 // usage: vm.RRDData(HOURLY) or vm.RRDData(HOURLY, AVERAGE)
 func (v *VirtualMachine) RRDData(ctx context.Context, timeframe Timeframe, consolidationFunction ...ConsolidationFunction) (rrddata []*RRDData, err error) {
